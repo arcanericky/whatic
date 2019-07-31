@@ -196,7 +196,7 @@ Arguments
 
 #### Escape Characters
 
-In the Commmand Prompt (`cmd.exe`), the caret (`^`) is used to escape the `&`, `\`, `<`, `>`, `^`, and `|` symbols
+In the Command Prompt (`cmd.exe`), the caret (`^`) is used to escape the `&`, `\`, `<`, `>`, `^`, and `|` symbols
 
 ```
 C:\>whatic ^& ^\ ^< ^> ^^ ^|
