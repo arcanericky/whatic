@@ -1,6 +1,5 @@
 VERSION_INJECT=main.versionText
 SRCS=*.go
-export GO111MODULE=on
 
 EXECUTABLE=bin/whatic
 
@@ -17,7 +16,7 @@ WINDOWS_386=$(WINDOWS)-386.exe
 
 .PHONY: all test clean
 
-all: test build
+all: build
 
 build: linux-amd64 windows-amd64 darwin-amd64 linux-386 windows-386
 
