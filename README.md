@@ -1,6 +1,6 @@
 # WhatIC
 
-Because command-line interfaces are difficult.
+Because command-line interfaces are difficult. Pronounced as "What I See".
 
 [![Build Status](https://travis-ci.com/arcanericky/whatic.svg?branch=master)](https://travis-ci.com/arcanericky/whatic)
 [![codecov](https://codecov.io/gh/arcanericky/whatic/branch/master/graph/badge.svg)](https://codecov.io/gh/arcanericky/whatic)
@@ -8,9 +8,9 @@ Because command-line interfaces are difficult.
 
 ## Using
 
-Use it to reveal how applications see the command line after they've been parsed and transformed.
+Use it to reveal how applications see command line arguments and options after they've been parsed and transformed by the shell.
 
-```
+```text
 $ whatic escaping= \" glob= L* single-quotes= '"'
 Command Line
 ------------
@@ -43,7 +43,7 @@ Some examples:
 
 Linux / Bash
 
-```
+```text
 $ WHATIC=\| whatic \ arg1 "   " arg3\ 
 Environment
 -----------
@@ -63,7 +63,7 @@ Arguments
 
 Windows Command Prompt (`cmd.exe`)
 
-```
+```text
 C:\>set WHATIC=^|
 
 C:\>whatic.exe arg
@@ -81,6 +81,26 @@ Arguments
 1 |arg|
 ```
 
+Windows PowerShell
+
+```text
+PS C:\>$Env:WHATIC="|"
+
+PS C:\>.\whatic.exe arg
+Environment
+-----------
+WHATIC=|
+
+Command Line
+------------
+|C:\whatic.exe| |arg|
+
+Arguments
+---------
+0 |C:\whatic.exe|
+1 |arg|
+```
+
 ## Examples
 
 The following examples are not full references for the different CLIs. They are only to show how `whatic` can be used to inspect how shells interpret and transform commands. If more information is needed, experiment with `whatic` or search for CLI references.
@@ -92,7 +112,8 @@ The [Bash shell][2] is assumed for these examples.
 #### Quoting
 
 Parameters can be single or double-quoted.
-```
+
+```text
 $ whatic "arg1" 'arg2'
 Command Line
 ------------
@@ -109,7 +130,7 @@ Arguments
 
 To give a single or double-quote as a parameter, use the `\` to escape them
 
-```
+```text
 $ whatic \" \' '"'
 Command Line
 ------------
@@ -127,7 +148,7 @@ Arguments
 
 The shell is responsible for the [glob patterns][1].
 
-```
+```text
 $ whatic L* READ??.md
 Command Line
 ------------
@@ -148,7 +169,7 @@ Because command-line argument parsing is largely left to the individual executab
 
 The Command Prompt (`cmd.exe`) arguments can be double-quoted, but if single-quotes are used, they will be included in the arguments.
 
-```
+```text
 C:\>whatic "arg" 'arg'
 Command Line
 ------------
@@ -163,7 +184,7 @@ Arguments
 
 Inserting a double-quote into an argument might take some experimentation. Use the `\` escape character to get that double-quote into the argument. If the double-quote is in the middle of an argument, two double-quotes can work, but be careful as this can surprise you if more parameters are used.
 
-```
+```text
 C:\>whatic \" ""arg1"" "arg2""arg3" arg4
 Command Line
 ------------
@@ -179,7 +200,7 @@ Arguments
 
 PowerShell can also be tricky at times. In general the backtick (\` / [grave accent](https://en.wikipedia.org/wiki/Grave_accent)) is used as the escape character. Early versions could use the backtick to escape the double-quote but recent versions don't. Use WhatIC to help refine these character combinations. Some examples are
 
-```
+```text
 PS C:\WhatIC> whatic arg1 'arg\"2' arg\`"3 arg4
 Command Line
 ------------
@@ -198,7 +219,7 @@ Arguments
 
 In the Command Prompt (`cmd.exe`), the caret (`^`) is used to escape the `&`, `\`, `<`, `>`, `^`, and `|` symbols
 
-```
+```text
 C:\>whatic ^& ^\ ^< ^> ^^ ^|
 Command Line
 ------------
@@ -219,7 +240,7 @@ Arguments
 
 Notice the Command Prompt (`cmd.exe`) and PowerShell do not handle the [glob patterns][1] like a POSIX shell does. That task is left to the executable being called.
 
-```
+```text
 C:\>whatic L*
 Command Line
 ------------

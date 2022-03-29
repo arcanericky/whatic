@@ -7,7 +7,7 @@ builds:
   - main: .
     binary: whatic
     ldflags:
-      - -s -w -X github.com/arcanericky/whatic/cmd.versionText={{.Version}}
+      - -s -w -X main.versionText={{.Version}}
     env:
       - CGO_ENABLED=0
     goos:
