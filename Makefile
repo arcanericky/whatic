@@ -1,5 +1,6 @@
 VERSION_INJECT=main.versionText
 SRCS=*.go
+MAIN=.
 
 EXECUTABLE=bin/whatic
 
@@ -36,20 +37,20 @@ test:
 
 # AMD64 Versions
 $(WINDOWS_AMD64): $(SRCS)
-	GOOS=windows GOARCH=amd64 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" github.com/arcanericky/whatic
+	GOOS=windows GOARCH=amd64 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" $(MAIN)
 
 $(LINUX_AMD64): $(SRCS)
-	GOOS=linux GOARCH=amd64 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" github.com/arcanericky/whatic
+	GOOS=linux GOARCH=amd64 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" $(MAIN)
 
 $(DARWIN_AMD64): $(SRCS)
-	GOOS=darwin GOARCH=amd64 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" github.com/arcanericky/whatic
+	GOOS=darwin GOARCH=amd64 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" $(MAIN)
 
 # 386 Versions
 $(WINDOWS_386): $(SRCS)
-	GOOS=windows GOARCH=386 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" github.com/arcanericky/whatic
+	GOOS=windows GOARCH=386 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" $(MAIN)
 
 $(LINUX_386): $(SRCS)
-	GOOS=linux GOARCH=386 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" github.com/arcanericky/whatic
+	GOOS=linux GOARCH=386 go build -o $@ -ldflags "-s -w -X $(VERSION_INJECT)=$(shell sh scripts/get-version.sh)" $(MAIN)
 
 clean:
 	rm -rf bin

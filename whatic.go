@@ -97,34 +97,31 @@ func arguments(opener, closer string, args []string) {
 }
 
 func delimiters() (string, string) {
-	var opener, closer string
-
 	delimiter := os.Getenv(envWhatIC)
-
 	delimiterLen := len(delimiter)
 
 	if delimiterLen > 0 {
 		fmt.Println("Environment")
 		fmt.Println("-----------")
 		fmt.Printf(envWhatIC+"=%s\n\n", delimiter)
-
-		if delimiterLen == 1 {
-			opener = delimiter
-			closer = delimiter
-		} else if delimiterLen > 1 {
-			opener = string(delimiter[0])
-			closer = string(delimiter[1])
-		}
 	}
 
-	return opener, closer
+	switch delimiterLen {
+	case 0:
+		return "", ""
+	case 1:
+		return delimiter, delimiter
+	}
+
+	return string(delimiter[0]), string(delimiter[1])
 }
 
 func main() {
 	if len(os.Args) == 1 {
 		help()
-	} else {
-		opener, closer := delimiters()
-		arguments(opener, closer, os.Args)
+		return
 	}
+
+	opener, closer := delimiters()
+	arguments(opener, closer, os.Args)
 }
